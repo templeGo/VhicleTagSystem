@@ -33,6 +33,22 @@ class Vehicle{
     applyForce(steer);
   }
 
+  PVector randomWalk(){
+    PVector currentVelocity = velocity;
+
+    currentVelocity.normalize();
+    PVector predictLocation = PVector.add(location, currentVelocity.mult(2));
+
+    // randomWalkする
+    PVector randomVector = PVector.random2D().mult(100);
+    float r = 3;
+    randomVector.limit(r);
+
+    PVector target = predictLocation.add(randomVector);
+
+    return target;
+  }
+
   PVector predictTarget(Vehicle vehicle){
     return new PVector(0, 0);
   }

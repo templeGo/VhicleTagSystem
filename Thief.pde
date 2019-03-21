@@ -4,8 +4,8 @@ class Thief extends Vehicle{
 
     Thief(float x, float y){
         super(x, y);
-        maxforce = 0.2;
-        visibility = 200;
+        maxforce = 0.3;
+        visibility = 300;
     }
 
     void update(){
@@ -23,18 +23,12 @@ class Thief extends Vehicle{
         super.seek(target);
     }
 
+    PVector randomWalk(){
+        return super.randomWalk();
+    }
+
     PVector predictTarget(Vehicle vehicle){
-        PVector currentVelocity = velocity;
-
-        currentVelocity.normalize();
-        PVector predictLocation = PVector.add(location, currentVelocity.mult(2));
-
-        // randomWalkする
-        PVector randomVector = PVector.random2D();
-        float r = 3;
-        randomVector.limit(r);
-
-        PVector target = predictLocation.add(randomVector);
+        PVector target = new PVector(0, 0);
 
         // thief->policeのベクトル
         PVector diff = PVector.sub(vehicle.location, location);
@@ -54,7 +48,7 @@ class Thief extends Vehicle{
     }
 
     void Autopsy(float d){
-        float deadLine = 10;
+        float deadLine = 7;
         if(d < deadLine){
             isDead = true;
         }
