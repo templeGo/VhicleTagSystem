@@ -23,9 +23,9 @@ void draw(){
   Iterator<Thief> it = thiefs.iterator();
   while(it.hasNext()){
     Thief thief = it.next();
-    PVector target = new PVector(0, 0);
+    PVector target = thief.randomWalk();
     for(Police police : polices){
-      target = thief.predictTarget(police);
+      target.add(thief.predictTarget(police));
     }
     thief.seek(target);
     thief.update();
@@ -39,7 +39,7 @@ void draw(){
   }
 
   for(Police police : polices){
-    PVector target = police.predictTarget(null);
+    PVector target = police.randomWalk();
     for(Thief thief : thiefs){
       float distance = PVector.sub(thief.location, police.location).mag();
       if(distance < worldRecord){
