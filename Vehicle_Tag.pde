@@ -27,6 +27,7 @@ void draw(){
     for(Police police : polices){
       target.add(thief.predictTarget(police));
     }
+    thief.separate(thiefs);
     thief.seek(target);
     thief.update();
     thief.keepAwayFromWall(50);
@@ -47,6 +48,7 @@ void draw(){
         target = thief.location;
       }
     }
+    police.separate(polices);
     police.seek(target);
     police.update();
     police.keepAwayFromWall(50);

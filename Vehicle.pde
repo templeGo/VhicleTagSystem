@@ -40,9 +40,9 @@ class Vehicle{
     PVector predictLocation = PVector.add(location, currentVelocity.mult(2));
 
     // randomWalkする
-    PVector randomVector = PVector.random2D().mult(100);
+    PVector randomVector = PVector.random2D();
     float r = 3;
-    randomVector.limit(r);
+    randomVector.setMag(r);
 
     PVector target = predictLocation.add(randomVector);
 
@@ -50,7 +50,7 @@ class Vehicle{
   }
 
   PVector predictTarget(Vehicle vehicle){
-    return new PVector(0, 0);
+    return new PVector();
   }
 
   void display() {

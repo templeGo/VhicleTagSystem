@@ -1,17 +1,23 @@
 class Thief extends Vehicle{
     color c = #343434;
     boolean isDead = false;
+    float boost = 1;
 
     Thief(float x, float y){
         super(x, y);
-        maxforce = 0.3;
-        visibility = 300;
+        maxforce = 0.22;
+        visibility = 200;
+        // if(random(1) < 0.1){
+        //     boost = 1.5;
+        //     maxforce = 0.3;
+        //     c = #780015;
+        // }
     }
 
     void update(){
         velocity.add(acceleration);
         velocity.limit(maxspeed);
-        location.add(velocity);
+        location.add(velocity.mult(boost));
         acceleration.mult(0);
     }
 
@@ -28,7 +34,7 @@ class Thief extends Vehicle{
     }
 
     PVector predictTarget(Vehicle vehicle){
-        PVector target = new PVector(0, 0);
+        PVector target = new PVector();
 
         // thief->policeのベクトル
         PVector diff = PVector.sub(vehicle.location, location);
@@ -48,9 +54,34 @@ class Thief extends Vehicle{
     }
 
     void Autopsy(float d){
-        float deadLine = 7;
+        float deadLine = 5;
         if(d < deadLine){
             isDead = true;
+        }
+    }
+
+    void separate(ArrayList<Thief> thiefs){
+        float desiredseparation = r*10;
+        PVector sum = new PVector();
+        int count = 0;
+        for(Thief other : thiefs){
+        float d = PVector.dist(location, other.location);
+        if((d > 0) && (d < desiredseparation)){
+            PVector diff = PVector.sub(location, other.location);
+            diff.normalize();
+            diff.div(d);
+            sum.add(diff);
+            count++;
+        }
+        }
+
+        if(count > 0){
+        sum.div(count);
+        sum.normalize();
+        sum.mult(maxspeed);
+        PVector steer = PVector.sub(sum, velocity); 
+        steer.limit(maxforce); 
+        applyForce(steer);
         }
     }
 
