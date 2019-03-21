@@ -1,10 +1,10 @@
 class Police extends Vehicle{
     float boost = 1.2;
-    color c = #006CEF;
+    color c = #FFFFFF;
     Police(float x, float y){
         super(x, y);
         maxforce = 0.1;
-        visibility = 100;
+        visibility = 150;
     }
 
     void update(){

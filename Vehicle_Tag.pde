@@ -4,7 +4,7 @@ ArrayList<Thief> thiefs = new ArrayList<Thief>();
 ArrayList<Police> polices = new ArrayList<Police>();
 
 float worldRecord = 80;
-color BGC = #F7F8FF;
+color BGC = #B8C7DB;
 
 void setup(){
   size(600, 600);

@@ -1,17 +1,17 @@
 class Thief extends Vehicle{
-    color c = #343434;
+    color c = #000000;
     boolean isDead = false;
     float boost = 1;
 
     Thief(float x, float y){
         super(x, y);
         maxforce = 0.22;
-        visibility = 200;
-        // if(random(1) < 0.1){
-        //     boost = 1.5;
-        //     maxforce = 0.3;
-        //     c = #780015;
-        // }
+        visibility = 230;
+        if(random(1) < 0.01){
+            boost = 2.2;
+            visibility = 50;
+            c = #6800C7;
+        }
     }
 
     void update(){
